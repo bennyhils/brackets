@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  brackets:
+    image: bennyhils/brackets
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
