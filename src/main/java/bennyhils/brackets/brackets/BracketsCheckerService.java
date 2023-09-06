@@ -26,6 +26,8 @@ public class BracketsCheckerService {
 
         */
 
+        char lastOpen = 0;
+
         int i = 0;
 
         //Проверяем все скобки, которые конфигурируются в Enum
@@ -40,6 +42,10 @@ public class BracketsCheckerService {
 
             for (char c : input.toCharArray()) {
                 if (c == b.getEnd()) {
+                    if (i > 0 && lastOpen != b.getStart()) {
+                        log.error("Закрывается не той скобкой, которой открылось");
+                        return false;
+                    }
                     i--;
                 }
                 if (i < 0) {
@@ -48,6 +54,7 @@ public class BracketsCheckerService {
                 }
                 if (c == b.getStart()) {
                     i++;
+                    lastOpen = b.getStart();
                 }
             }
         }

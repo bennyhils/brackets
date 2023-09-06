@@ -36,12 +36,12 @@ class BracketsCheckerApplicationTests {
 
     @Test
     void bracketsCheckerNoOpenTests() {
-        log.info("Проверка неоткрытой скобки");
+        log.info("Проверка открытой скобки");
         Assert.isTrue(
                 !bracketsCheckerService.checkBrackets("Текст с ) открытой скобкой"),
-                "Проверка незакрытой скобки ПРОВАЛЕНА!"
+                "Проверка открытой скобки ПРОВАЛЕНА!"
         );
-        log.info("Успешная проверка с неоткрытой скобкой");
+        log.info("Успешная проверка с открытой скобкой");
     }
 
     @Test
@@ -49,9 +49,9 @@ class BracketsCheckerApplicationTests {
         log.info("Проверка незакрытой скобки");
         Assert.isTrue(
                 !bracketsCheckerService.checkBrackets("Текст с (незакрытой скобкой"),
-                "Проверка открытой скобки ПРОВАЛЕНА!"
+                "Проверка незакрытой скобки ПРОВАЛЕНА!"
         );
-        log.info("Успешная проверка с открытой скобкой");
+        log.info("Успешная проверка с незакрытой скобкой");
     }
 
     @Test
@@ -62,5 +62,25 @@ class BracketsCheckerApplicationTests {
                 "Проверка пустого текста ПРОВАЛЕНА!"
         );
         log.info("Успешная проверка пустого скобкой");
+    }
+
+    @Test
+    void bracketsChech1() {
+        log.info("Проверка перемешки скобок");
+        Assert.isTrue(
+                !bracketsCheckerService.checkBrackets("((f})"),
+                "Проверка перемешки скобок ПРОВАЛЕНА!"
+        );
+        log.info("Успешная проверка перемешки скобок");
+    }
+
+    @Test
+    void bracketsChech2() {
+        log.info("Проверка ({)}");
+        Assert.isTrue(
+                !bracketsCheckerService.checkBrackets("([(]f})"),
+                "Проверка перемешки скобок ПРОВАЛЕНА!"
+        );
+        log.info("Успешная проверка перемешки скобок");
     }
 }
